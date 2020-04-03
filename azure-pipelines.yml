@@ -11,6 +11,10 @@ steps:
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
+- script: npx ng test --watch=false
+  displayName: 'Tests'
+  
 - script: |
     npm install -g @angular/cli
     npm install
