@@ -9,10 +9,13 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    versionSpec: '12.x'
+  displayName: 'Setup Environment'
 
-- script: npm ng test --watch=false
+- script: npm install
+  displayName: 'Install Dependencies'
+
+- script: npx ng test --watch=false
   displayName: 'Tests'
 
 - task: PublishTestResults@2
@@ -23,8 +26,5 @@ steps:
     testResultsFiles: '**/TESTS-*.xml'
   displayName: 'Publish Test Results'
 
-- script: |
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
-  displayName: 'npm install and build'
+- script: npx ng build --prod
+  displayName: 'Build'
